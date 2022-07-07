@@ -1,3 +1,4 @@
+from os import stat
 from random import choice
 from utility import clamp
 from table import Table
@@ -22,3 +23,5 @@ for _ in range(rounds):
     stats.addRow(guess, correct)
 
 print(stats)
+stats.export('redorblack.csv', append=False)
+stats.export('redorblackAppend.csv')
