@@ -1,16 +1,24 @@
-# This is a sample Python script.
+from random import choice
+from utility import clamp
+from table import Table
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+stats = Table('Red or Black', [
+    'guess',
+    'correct'
+])
 
+options = ['red', 'black']
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'fu')  # Press Ctrl+F8 to toggle the breakpoint.
+rounds = clamp(
+    int(input('How many times? ')), 
+    0,          # min
+    1_000_000   # max
+)
 
+for _ in range(rounds):
+    chosen = choice(options)
+    guess = choice(options)
+    correct = guess == chosen
+    stats.addRow(guess, correct)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print(stats)
