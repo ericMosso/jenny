@@ -12,7 +12,7 @@ options = ['red', 'black']
 
 rounds = clamp(
     int(input('How many times? ')), 
-    0,          # min
+    1,          # min
     1_000_000   # max
 )
 
@@ -22,6 +22,8 @@ for _ in range(rounds):
     correct = guess == chosen
     stats.addRow(guess, correct)
 
-print(stats)
-stats.export('redorblack.csv', append=False)
-stats.export('redorblackAppend.csv')
+# output
+stats.export('most_recent.csv', append=False)
+stats.export('aggregate.csv')
+
+print (f'Ran {rounds} times')

@@ -39,14 +39,16 @@ class Table:
         # open file in append mode or replace mode
         if append and os.path.exists(path) and os.path.isfile(path):
             outfile = open(path, 'a')
+            appending = True
         else:
             outfile = open(path, 'w')
+            appending = False
 
         # create a file writer
         csvWriter = csv.writer(outfile, delimiter=',', dialect='unix')
 
         # write rows, skip header if append mode
-        if append:
+        if appending:
             headlessMatrix = self.matrix[1:]
             csvWriter.writerows(headlessMatrix)
         else:
