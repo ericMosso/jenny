@@ -1,4 +1,3 @@
-from os import stat
 from random import choice
 from utility import clamp
 from table import Table
