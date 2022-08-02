@@ -1,84 +1,78 @@
 # Author(s): Eric Mossotti, Colby Ackerman
 # About: Red or Black - Gathering data
+
 from random import choice
 import pandas as pd
 
-# creates placeholder variables to hold values corresponding to the randomly,
-# and automatically, generated data for red and black values
-blkBot = 0
-redBot = 0
 
-# placeholder values for manually inputted red and black values
-blkMan = 0
-redMan = 0
+def colorChoice(blks, reds, n):
 
-# the two possibilities which will be used for easy readbility in the data frame
-possibilities = ['red', 'black']
+    i = 0
 
-# user specifies number of rounds n
-n = int(input("Enter how many rounds n: "))
+    # the two possibilities which will be used for easy readability in the data frame
+    possibilities = ['red', 'black']
 
-# DATA GENERATION STEP
+    # loop iterates until i equals number of rounds specified by the user
+    while i < n:
 
-# counter set to 0 initially
-i = 0
+        # bot choice using random data generator aka jenny
+        botsChoice = choice(possibilities)
 
-# loop iterates until i equals number of rounds specified by the user
-while i < n:
-    # bot choice using random data generator aka jenny
-    botsChoice = choice(possibilities)
-    if botsChoice == 'red':
-        redBot = redBot + 1
-    else:
-        blkBot = blkBot + 1
+        if botsChoice == 'red':
+            reds = reds + 1
 
-    # just a basic proof of concept
+        else:
+            blks = blks + 1
 
-    # manual input for red
-    x = input("Red or black? (type r for red or b for black): ")
+        # updates how many turns have passed for the while loop
+        i += 1
 
-    # manual input for red
-    if x == 'r':
-        redMan = redMan + 1
+# MAIN
+def main():
 
-    # inputs of b along with any errors in input
-    # are simply going to register as black for now
-    else:
-        blkMan = blkMan + 1  # manual input for black
+    # creates placeholder variables to hold values corresponding to them randomly,
+    # and automatically, generated data for red and black values
+    blks = 0
+    reds = 0
 
-    # updates how many turns have passed for the while loop
-    i += 1
 
-# creates a dictionary of the manual and randomly generated inputs
-manbot_dict = {'Man|Bot': ['Bot', 'Man'],
-               'Reds': [redBot, redMan],
-               'Blacks': [blkBot, blkMan]}
+    # user specifies number of rounds n
+    n = int(input("Enter how many rounds n: "))
 
-# creates an empty dataframe
-manbot_df = pd.DataFrame(manbot_dict)
+    # DATA GENERATION STEP
+    colorChoice(blks, reds, n)
 
-# fills in the dataframe in accordance with the dictionary that was created previously
-manbot_df = manbot_df.set_index('Man|Bot')
 
-# test print of the dataframe to confirm that the dataframe was successfully created
-print("\n",
-      manbot_df)
+    # creates a dictionary of the randomly generated inputs
+    bot_dict = {'Bot': ['Bot'],
+                   'Reds': [reds],
+                   'Blacks': [blks]}
 
-# Create a .CSV File From User Input
+    # creates an empty dataframe
+    bot_df = pd.DataFrame(bot_dict)
 
-# takes input from user
-filepath = str(input("\n"
-                     "To create and save a .CSV file of your dataframe\n"
-                     "please enter the desired filepath along with the name of the file.\n"
-                     "Do not input quotes. Use single backslahses.\n"
-                     "e.g.: C:\\folder\\subfolder\\filename.csv"
-                     "\n" ))
+    # fills in the dataframe in accordance with the dictionary that was created previously
+    bot_df = bot_df.set_index('Bot')
 
-# creates a file of a user specified path
-redBlackData = open(filepath, "x")
+    # test print of the dataframe to confirm that the dataframe was successfully created
+    print("\n",
+          bot_df)
 
-# saves the dataframe information to the newly created .CSV file
-manbot_df.to_csv(redBlackData)
+    # Create a .CSV File From User Input
 
-# if __name__ == '__main__':
-#     pass
+    # takes input from user
+    filepath = str(input("\n"
+                         "To create and save a .CSV file of your dataframe\n"
+                         "please enter the desired filepath along with the name of the file.\n"
+                         "Do not input quotes. Use single backslashes.\n"
+                         "e.g.: C:\\folder\\subfolder\\filename.csv"
+                         "\n" ))
+
+    # creates a file of a user specified path
+    redBlackData = open(filepath, "x")
+
+    # saves the dataframe information to the newly created .CSV file
+    bot_df.to_csv(redBlackData)
+
+if __name__ == '__main__':
+     pass
